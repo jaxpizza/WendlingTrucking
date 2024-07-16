@@ -54,6 +54,17 @@ const SubmitButton = styled.button`
   }
 `;
 
+const MessageBanner = styled.div`
+  margin-top: 1rem;
+  padding: 1rem;
+  border-radius: 5px;
+  text-align: center;
+  font-weight: bold;
+  ${props => props.isError 
+    ? 'background-color: #ffcccc; color: #cc0000;'
+    : 'background-color: #ccffcc; color: #006600;'}
+`;
+
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -61,14 +72,40 @@ const Contact = () => {
     phone: '',
     message: '',
   });
+  const [submitting, setSubmitting] = useState(false);
+  const [message, setMessage] = useState(null);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Form submission is handled by Netlify
+    setSubmitting(true);
+    setMessage(null);
+
+    try {
+      const response = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({
+          "form-name": "contact",
+          ...formData
+        }).toString()
+      });
+
+      if (response.ok) {
+        setMessage({ text: "Thank you for your message. We'll be in touch soon!", isError: false });
+        setFormData({ name: '', email: '', phone: '', message: '' });
+      } else {
+        throw new Error(`Server responded with ${response.status}`);
+      }
+    } catch (error) {
+      console.error("Form submission error:", error);
+      setMessage({ text: "There was a problem submitting your message. Please try again later.", isError: true });
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -112,8 +149,15 @@ const Contact = () => {
           onChange={handleChange}
           required
         />
-        <SubmitButton type="submit">Send Message</SubmitButton>
+        <SubmitButton type="submit" disabled={submitting}>
+          {submitting ? 'Sending...' : 'Send Message'}
+        </SubmitButton>
       </ContactForm>
+      {message && (
+        <MessageBanner isError={message.isError}>
+          {message.text}
+        </MessageBanner>
+      )}
     </ContactSection>
   );
 };
