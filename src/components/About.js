@@ -60,10 +60,10 @@ const About = () => {
       <SectionTitle>About Wendling Trucking</SectionTitle>
       <AboutContent>
         <AboutText>
+          <p>Wendling Trucking started as a necessity for hauling corn and soybeans from our family farm fields and storage grain bins to a nearby Frito-Lay grain processing unit. What began as a simple solution for our sixth-generation family farm has grown into a trusted hauling service with over 15 years of experience serving Frito-Lay and the broader Central Illinois community.</p>
           <p>For over two decades, Wendling Trucking has been the cornerstone of reliable transportation in Central Illinois. Based near Broadlands, we've built our reputation on a foundation of trust, efficiency, and an intimate understanding of our local community's unique needs.</p>
-          <p>Our commitment to excellence has made us a preferred partner for businesses of all sizes, from local farms to industry giants like Frito-Lay. This diverse client base showcases our ability to meet the exacting standards of major corporations while maintaining the personalized touch that our local clients value.</p>
-          <p>At Wendling Trucking, we're more than just a hauling service - we're an integral part of the Central Illinois supply chain. Our fleet of meticulously maintained vehicles, coupled with our team of skilled, experienced drivers, ensures that your cargo is always in safe hands, whether it's grain from local fields or materials for construction projects.</p>
-          <CtaButton href="#contact">Schedule a Consultation</CtaButton>
+          <p>Today, Wendling Trucking continues to be an integral part of the Central Illinois agricultural community and supply chain. Our fleet of well-maintained vehicles and team of experienced drivers ensure safe, efficient transportation for a wide range of cargo - from grain and agricultural products to construction materials. We remain committed to providing personalized, reliable service that meets the evolving needs of our diverse clientele, from local family farms to larger operations across the region.</p>
+          <CtaButton href="#contact">Schedule a Haul</CtaButton>
         </AboutText>
         <AboutImage src="/images/about-wendling-trucking.jpg" alt="Wendling Trucking fleet" />
       </AboutContent>
