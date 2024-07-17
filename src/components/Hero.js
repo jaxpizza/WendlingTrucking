@@ -36,12 +36,20 @@ const HeroContent = styled(motion.div)`
 const HeroTitle = styled(motion.h1)`
   font-size: 3.5rem;
   margin-bottom: 1rem;
+
+  @media (max-width: 768px) {
+    font-size: 2.5rem;
+  }
 `;
 
 const HeroSubtitle = styled(motion.p)`
   font-size: 1.2rem;
   max-width: 600px;
   margin: 0 auto 1.5rem;
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+  }
 `;
 
 const CtaButton = styled(motion.a)`
@@ -61,9 +69,23 @@ const CtaButton = styled(motion.a)`
   }
 `;
 
+const AnimatedBackground = styled(motion.div)`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0) 100%);
+`;
+
 const Hero = () => {
   return (
     <HeroContainer>
+      <AnimatedBackground
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 2, repeat: Infinity, repeatType: "reverse" }}
+      />
       <HeroContent
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -74,37 +96,35 @@ const Hero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.8 }}
         >
-          Expert Hauling Services in Central Illinois
+          Family-Owned Hauling Services in Central Illinois
         </HeroTitle>
         <HeroSubtitle
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4, duration: 0.8 }}
         >
-          With over 20 years of experience, Wendling Trucking delivers reliable and efficient transportation solutions for businesses and farmers across Champaign County and beyond.
+          Wendling Trucking: Serving Champaign County and beyond with reliable agricultural and construction hauling solutions for over 15 years.
         </HeroSubtitle>
-        <div>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6, duration: 0.8 }}
+        >
           <CtaButton
             href="#contact"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6, duration: 0.8 }}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            Get a Quote
+            Contact Us
           </CtaButton>
           <CtaButton
             href="#services"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8, duration: 0.8 }}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
             Our Services
           </CtaButton>
-        </div>
+        </motion.div>
       </HeroContent>
     </HeroContainer>
   );
