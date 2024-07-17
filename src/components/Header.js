@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import MobileNavigation from './MobileNavigation'; // Import the new component
 
 const HeaderContainer = styled.header`
   background-color: ${props => props.scrolled ? 'rgba(196, 30, 58, 0.9)' : 'var(--primary-red)'};
@@ -30,6 +31,10 @@ const Logo = styled(Link)`
 `;
 
 const Nav = styled.nav`
+  @media (max-width: 768px) {
+    display: none;
+  }
+
   ul {
     list-style-type: none;
     padding: 0;
@@ -77,6 +82,7 @@ const Header = () => {
             <li><a href="/#contact">Contact</a></li>
           </ul>
         </Nav>
+        <MobileNavigation /> {/* Add the MobileNavigation component here */}
       </HeaderContent>
     </HeaderContainer>
   );

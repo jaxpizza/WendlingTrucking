@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
 import { post as post1 } from '../blogPosts/benefits-outsourcing-dirt-removal-hauling';
 import { post as post2 } from '../blogPosts/reliable-agricultural-hauling-central-illinois';
 
@@ -15,6 +16,11 @@ const BlogTitle = styled.h1`
   text-align: center;
   color: var(--primary-red);
   margin-bottom: 2rem;
+  font-size: 2.5rem;
+
+  @media (max-width: 768px) {
+    font-size: 2rem;
+  }
 `;
 
 const BlogGrid = styled.div`
@@ -23,7 +29,7 @@ const BlogGrid = styled.div`
   gap: 2rem;
 `;
 
-const BlogCard = styled.article`
+const BlogCard = styled(motion.article)`
   background: var(--white);
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0,0,0,0.1);
@@ -48,6 +54,7 @@ const BlogContent = styled.div`
 const BlogPostTitle = styled.h2`
   color: var(--primary-red);
   margin-top: 0;
+  font-size: 1.5rem;
 `;
 
 const ReadMoreLink = styled(Link)`
@@ -72,8 +79,13 @@ const Blog = () => {
       </Helmet>
       <BlogTitle>Wendling Trucking Blog</BlogTitle>
       <BlogGrid>
-        {blogPosts.map(post => (
-          <BlogCard key={post.id}>
+        {blogPosts.map((post, index) => (
+          <BlogCard
+            key={post.id}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: index * 0.1, duration: 0.5 }}
+          >
             <BlogImage src={post.previewImage} alt={post.title} />
             <BlogContent>
               <BlogPostTitle>{post.title}</BlogPostTitle>

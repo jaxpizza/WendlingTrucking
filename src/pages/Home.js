@@ -1,11 +1,25 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
+import { motion } from 'framer-motion';
 import Hero from '../components/Hero';
 import Services from '../components/Services';
 import Stats from '../components/Stats';
 import About from '../components/About';
 import BlogPreview from '../components/BlogPreview';
 import Contact from '../components/Contact';
+
+const MotionSection = ({ children }) => {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.3 }}
+      transition={{ duration: 0.5 }}
+    >
+      {children}
+    </motion.div>
+  );
+};
 
 const Home = () => {
   return (
@@ -26,11 +40,21 @@ const Home = () => {
         <link rel="canonical" href="https://www.wendlingtrucking.com" />
       </Helmet>
       <Hero />
-      <Services />
-      <Stats />
-      <About />
-      <BlogPreview />
-      <Contact />
+      <MotionSection>
+        <Services />
+      </MotionSection>
+      <MotionSection>
+        <Stats />
+      </MotionSection>
+      <MotionSection>
+        <About />
+      </MotionSection>
+      <MotionSection>
+        <BlogPreview />
+      </MotionSection>
+      <MotionSection>
+        <Contact />
+      </MotionSection>
     </>
   );
 };
